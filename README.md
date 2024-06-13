@@ -9,7 +9,7 @@ https://github.com/coreylane/slackrock/assets/5312939/58479fa6-6fc9-4981-8c91-10
 🎛️ **Customization**: Quickly evaluate and experiment with [supported models](https://docs.aws.amazon.com/bedrock/latest/userguide/conversation-inference.html#conversation-inference-supported-models-features) including Amazon Titan, Anthropic Claude, Mistral AI, Cohere Command, and Meta Llama. Using [Slack Bolt for Python](https://slack.dev/bolt-python/tutorial/getting-started) makes it easy to extend the Lambda code to create your own event handlers or Slack Slash Commands.
 
 🧮 **Cost Efficiency**: Only pay for what you use with Amazon Bedrock's pay-as-you-go pricing.
-- Costs automatically decrease during decreased periods of usage ie. holidays and weekends.
+- Costs automatically decrease during decreased periods of low usage ie. holidays and weekends.
 - Serverless compute requires minimal operational overhead and uses efficient [Graviton2](https://aws.amazon.com/ec2/graviton/) processors.
 - Works with free Slack workspace, pro/enterprise plans not required.
 

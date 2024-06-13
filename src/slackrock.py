@@ -15,18 +15,6 @@ app = App(
 )
 
 
-def remove_bot_mention(message_text, bot_user_id):
-    mention = f"<@{bot_user_id}>"
-    logger.info(f"Original message text: {message_text}")
-    logger.info(f"Bot user ID: {bot_user_id}")
-    logger.info(f"Mention to remove: {mention}")
-
-    updated_message_text = message_text.replace(mention, "").strip()
-    logger.info(f"Updated message text: {updated_message_text}")
-
-    return updated_message_text
-
-
 def invoke_model(messages):
     """
     Invokes a bedrock model using the provided messages.
@@ -126,7 +114,49 @@ app.event("app_mention")(
 )
 
 
+@app.message(":bug:")
+def handle_debug_message(message, say):
+    logger.info(f"Received debug message: {message['text']}")
+    logger.info(f"Lambda function name: {os.environ.get('AWS_LAMBDA_FUNCTION_NAME')}")
+    logger.info(f"Lambda version: {os.environ.get('AWS_LAMBDA_FUNCTION_VERSION')}")
+    logger.info(f"Lambda region: {os.environ.get('AWS_REGION')}")
+    logger.info(f"Lambda memory: {os.environ.get('AWS_LAMBDA_FUNCTION_MEMORY_SIZE')}")
+    logger.info(f"Lambda log group: {os.environ.get('AWS_LAMBDA_LOG_GROUP_NAME')}")
+
+    debug_info = (
+        f"Current Lambda function name: {os.environ.get('AWS_LAMBDA_FUNCTION_NAME')}\n"
+        f"Current Lambda function version: {os.environ.get('AWS_LAMBDA_FUNCTION_VERSION')}\n"
+        f"Current Lambda region: {os.environ.get('AWS_REGION')}\n"
+        f"Current Lambda memory limit (MB): {os.environ.get('AWS_LAMBDA_FUNCTION_MEMORY_SIZE')}\n"
+        f"Current Lambda log group name: {os.environ.get('AWS_LAMBDA_LOG_GROUP_NAME')}\n"
+    )
+
+    say(debug_info)
+
+
 def handle_message(body, say):
+    """
+    Handles incoming messages from a Slack channel and responds accordingly.
+
+    Args:
+        body (dict): The incoming message payload from Slack.
+        say (function): A function provided by the Slack Bolt app to send a response message.
+
+    Returns:
+        None
+
+    Raises:
+        Exception: If an error occurs while processing the message.
+
+    This function performs the following steps:
+    1. Extracts relevant information from the incoming message payload, such as the thread timestamp, bot ID, and channel ID.
+    2. Checks if the message is part of a thread and if the bot has responded earlier in the thread.
+    3. Retrieves the conversation history from Slack for the given thread.
+    4. Constructs a list of messages with their roles (user or assistant) and content.
+    5. Invokes a model with the constructed list of messages to generate a response.
+    6. Sends the generated response back to the Slack channel using the provided `say` function.
+    7. If an exception occurs during the process, it logs the error and sends an error message to the Slack channel.
+    """
     logger.debug(body)
 
     event = body["event"]

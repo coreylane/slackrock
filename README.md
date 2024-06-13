@@ -121,9 +121,9 @@ The Bedrock [Converse API](https://docs.aws.amazon.com/bedrock/latest/APIReferen
 Currently this model is only available in US West (Oregon, us-west-2). Change the `region` parameter in `samconfig.toml` and try it out!
 
 ## Can I customize the personality or overall tone of the responses?
-Absolutely! This is a very useful and often fun feature to experiment with. Simply adjust the [system prompt](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html#bedrock-runtime_Converse-request-system) to the converse api call to gain more control over how Bedrock models answer your questions. See: [Getting started with the Amazon Bedrock Converse API](https://community.aws/content/2hHgVE7Lz6Jj1vFv39zSzzlCilG/getting-started-with-the-amazon-bedrock-converse-api#setting-a-system-prompt). 
+Absolutely! This is a very useful and often fun feature to experiment with. Simply adjust the [system prompt](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html#bedrock-runtime_Converse-request-system) to the converse api call to influence how Bedrock models respond. You can fine-tune your system prompt to give your bot a more unique personality, meet specific constraints & business requirements, or add additional context. See: [Getting started with the Amazon Bedrock Converse API](https://community.aws/content/2hHgVE7Lz6Jj1vFv39zSzzlCilG/getting-started-with-the-amazon-bedrock-converse-api#setting-a-system-prompt). 
 
-The default Slackrock system promopt simply instructs the models to use Slack compatible Markdown formatting. Anthropic has a great page to [learn more about system prompts](https://docs.anthropic.com/en/docs/system-prompts).
+The default Slackrock system prompt simply instructs the models to use Slack compatible Markdown formatting. Anthropic has a great page to [learn more about system prompts](https://docs.anthropic.com/en/docs/system-prompts).
 
 Here is an example that will cause your app to respond to all queries
 
@@ -170,7 +170,7 @@ By default, provisioned concurrency is not enabled in the SAM template to keep c
 Using Lambda provisioned concurrency for a Slack app endpoint function is beneficial for three main reasons in this case:
 
 1. Provisioned concurrency reduces cold start latencies by keeping a specified number of function instances warm and ready to respond, eliminating delays caused by initializing the execution environment.
-1. Slack requires a response within 3 seconds or will resend messages and cause unecessary duplicate Bedrock model invocations.
+1. Slack requires a response within 3 seconds or will resend messages and cause unnecessary duplicate Bedrock model invocations.
 1. Fast response times are essential for providing the best user experience in realtime chat applications like Slack apps. Provisioned concurrency minimizes latency and delivers a smoother user experience.
 
 By allocating provisioned concurrency, you ensure that your Slack app endpoint function is always ready to handle incoming requests promptly, meeting Slack's strict latency requirements and providing a reliable and responsive user experience.

@@ -5,8 +5,8 @@ capabilities = "CAPABILITY_IAM"
 confirm_changeset = true
 region = "us-east-1"
 resolve_s3 = true
-s3_prefix = "Slackrock"
-stack_name = "Slackrock"
+s3_prefix = "slackrock"
+stack_name = "slackrock"
 
 [default.sync.parameters]
 watch = true

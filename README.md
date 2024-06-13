@@ -4,13 +4,11 @@ Converse with your favorite [LLMs](https://en.wikipedia.org/wiki/Large_language_
 https://github.com/coreylane/slackrock/assets/5312939/58479fa6-6fc9-4981-8c91-102a5a8f3dfc
 
 ## ✨ Features
-
 💬 Uses Amazon Bedrock [Converse API](https://aws.amazon.com/about-aws/whats-new/2024/05/amazon-bedrock-new-converse-api/) for multi-turn conversations, allowing models to retain context of the interaction over a long period of time. Come back to a thread days later and pick up where you left off!
 
 🎛️ **Customization**: Quickly evaluate and experiment with [supported models](https://docs.aws.amazon.com/bedrock/latest/userguide/conversation-inference.html#conversation-inference-supported-models-features) including Amazon Titan, Anthropic Claude, Mistral AI, Cohere Command, and Meta Llama. Using [Slack Bolt for Python](https://slack.dev/bolt-python/tutorial/getting-started) makes it easy to extend the Lambda code to create your own event handlers or Slack Slash Commands.
 
 🧮 **Cost Efficiency**: Only pay for what you use with Amazon Bedrock's pay-as-you-go pricing.
-
 - Costs automatically decrease during decreased periods of usage ie. holidays and weekends.
 - Serverless compute requires minimal operational overhead and uses efficient [Graviton2](https://aws.amazon.com/ec2/graviton/) processors.
 - Works with free Slack workspace, pro/enterprise plans not required.
@@ -18,8 +16,7 @@ https://github.com/coreylane/slackrock/assets/5312939/58479fa6-6fc9-4981-8c91-10
 😊 **Simplicity**: Get your own bot up and running quickly with just a few `sam` commands.
 
 # 🏛️ Architecture
-![Alt Text](docs/images/slackrock_architecture.png)
-
+![slackrock_architecture.png](docs/images/slackrock_architecture.png)
 
 # 🏗️ Getting started
 ## 📋 Prerequisites
@@ -29,7 +26,6 @@ https://github.com/coreylane/slackrock/assets/5312939/58479fa6-6fc9-4981-8c91-10
 - [aws-cli](https://github.com/aws/aws-cli)
 - Python 3.12
 
-
 ## 🚀 Deploy Slackrock
 Let's get started!
 
@@ -37,13 +33,11 @@ Let's get started!
 
 1. Create a Slack app (https://api.slack.com/apps) from manifest using the `slack-app-manifest.yaml` file provided in this project.
 
-    <video src="docs/video/create_slack_app.mp4" controls>
-    Your browser does not support the video tag.
-    </video>
+    https://github.com/coreylane/slackrock/assets/5312939/dcad0e7a-391a-4a69-980b-6270d403da47
 
 1. Once the app is created, install the app in your Slack workspace.
 
-    ![GitHub Logo](/docs/images/install_slack_app.png)
+    ![install_slack_app.png](/docs/images/install_slack_app.png)
 
 1. Gather Slack secrets
     1. Navigate to 'Basic Information' and note the `Signing Secret`
@@ -86,7 +80,6 @@ Let's get started!
 - [app_home_opened](https://api.slack.com/events/app_home_opened) (optional)
 
     ![slack_bot_events.png](/docs/images/slack_bot_events.png)
-
 
 ## 🎉 Say Hey!
 It's time to test your bot! Review Cloudwatch Logs if you get any errors or the bot is unresponsive.

@@ -103,7 +103,7 @@ It's time to test your bot! Review Cloudwatch Logs if you get any errors or the 
 To iterate on the code locally, use `sam sync`. The command below starts a process that watches your local application for changes and automatically syncs them to the AWS Cloud.
 
 ```
-sam sync --watch --stack-name lanecor-slackapp
+sam sync --watch --stack-name Slackrock
 ```
 
 ## How do I interact with different Bedrock models?

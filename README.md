@@ -107,7 +107,7 @@ sam sync --watch --stack-name Slackrock
 ```
 
 ## How do I interact with different Bedrock models?
-Update the `BEDROCK_MODEL_ID` envirohnment variable in `template.yaml` to one of the [supported models](https://docs.aws.amazon.com/bedrock/latest/userguide/conversation-inference.html#conversation-inference-supported-models-features) and run `sam deploy`.
+Update the `BEDROCK_MODEL_ID` environment variable in `template.yaml` to one of the [supported models](https://docs.aws.amazon.com/bedrock/latest/userguide/conversation-inference.html#conversation-inference-supported-models-features) and run `sam deploy`.
 
 Alternatively, you can also update the Lambda function environment variables directly via the AWS console or CLI.
 

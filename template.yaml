@@ -26,10 +26,10 @@ Resources:
       Handler: lambda_function.lambda_handler
       Runtime: python3.12
       Timeout: 300 # 5 Minutes
-      AutoPublishAlias: live
 
       # Using provisioned concurrency can potential increase performance but also increases costs.
       # Since one of my goals is to run this solution with the lowest cost possible I'm leaving it disabled by default.
+      # AutoPublishAlias: live
       # ProvisionedConcurrencyConfig:
       #   ProvisionedConcurrentExecutions: 5
 

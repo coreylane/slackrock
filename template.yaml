@@ -40,7 +40,6 @@ Resources:
         Variables:
           SLACK_BOT_TOKEN: !Sub "{{resolve:secretsmanager:${SlackSecretsName}:SecretString:SLACK_BOT_TOKEN}}"
           SLACK_SIGNING_SECRET: !Sub "{{resolve:secretsmanager:${SlackSecretsName}:SecretString:SLACK_SIGNING_SECRET}}"
-          # https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#model-ids-arns
           BEDROCK_MODEL_ID: anthropic.claude-3-sonnet-20240229-v1:0
       Policies:
         - Version: "2012-10-17"

@@ -1,0 +1,26 @@
+{
+    "editor.formatOnSave": true,
+    "files.exclude": {
+        "**/__pycache__": true,
+        "**/.pytest_cache": true,
+        "**/.coverage": true
+    },
+    "files.watcherExclude": {
+        "**/.aws-sam/**": true
+    },
+    "search.exclude": {
+        "**/.aws-sam": true
+    },
+    "aws.telemetry": false,
+    "yaml.format.enable": true,
+    "yaml.customTags": [
+        "!Ref",
+        "!GetAtt",
+        "!Sub",
+        "!ImportValue",
+        "!Join"
+    ],
+    "[yaml]": {
+        "editor.formatOnSave": true
+    }
+}

@@ -1,0 +1,62 @@
+Transform: AWS::Serverless-2016-10-31
+
+Description: Slackrock - Conversational AI assistant powered by Amazon Bedrock & Lambda
+
+Parameters:
+  SlackSecretsName:
+    Type: String
+    Description: The name of the AWS Secrets Manager secret containing Slack bot token and signing secret.
+    Default: slackrock
+
+Resources:
+  Slackrock:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: Slackrock
+      Description: Slackrock - Conversational AI assistant powered by Amazon Bedrock & Lambda
+      Architectures: [arm64]
+
+      # Increasing this may improve performance since the CPU power allocated to a Lambda function is proportional
+      # to the amount of memory configured for the function but this does have cost implications. 512 seems to work well in my testing.
+      MemorySize: 512
+
+      CodeUri: ./src/
+      FunctionUrlConfig:
+        AuthType: NONE
+      Handler: lambda_function.lambda_handler
+      Runtime: python3.12
+      Timeout: 300 # 5 Minutes
+      AutoPublishAlias: live
+
+      # Using provisioned concurrency can potential increase performance but also increases costs.
+      # Since one of my goals is to run this solution with the lowest cost possible I'm leaving it disabled by default.
+      # ProvisionedConcurrencyConfig:
+      #   ProvisionedConcurrentExecutions: 5
+
+      # Use CloudWatch metric ConcurrentExecutions to determine if you need to increase this.
+      ReservedConcurrentExecutions: 10
+
+      Environment:
+        Variables:
+          SLACK_BOT_TOKEN: !Sub "{{resolve:secretsmanager:${SlackSecretsName}:SecretString:SLACK_BOT_TOKEN}}"
+          SLACK_SIGNING_SECRET: !Sub "{{resolve:secretsmanager:${SlackSecretsName}:SecretString:SLACK_SIGNING_SECRET}}"
+          # https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#model-ids-arns
+          BEDROCK_MODEL_ID: anthropic.claude-3-sonnet-20240229-v1:0
+      Policies:
+        - Version: "2012-10-17"
+          Statement:
+            - Sid: AllowLambdaSelfInvoke
+              Effect: Allow
+              Action:
+                - lambda:InvokeFunction
+              Resource: !Sub "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:Slackrock:*"
+            - Sid: AllowBedrockInvoke
+              Effect: Allow
+              Action:
+                - bedrock:InvokeModel
+              Resource: "*"
+
+Outputs:
+  SlackrockUrl:
+    Description: "Lambda Function URL for Slackrock endpoint"
+    Value: !GetAtt SlackrockUrl.FunctionUrl

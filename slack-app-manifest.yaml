@@ -1,0 +1,24 @@
+display_information:
+  name: Slackrock
+  description: An interactive AI assistant powered by AWS Bedrock. Ask me anything!
+  background_color: "#05a88d"
+features:
+  app_home:
+    home_tab_enabled: true
+    messages_tab_enabled: true
+  bot_user:
+    display_name: Slackrock
+    always_online: true
+oauth_config:
+  scopes:
+    bot:
+      - app_mentions:read
+      - channels:history
+      - chat:write
+      - im:history
+      - im:read
+      - im:write
+settings:
+  org_deploy_enabled: false
+  socket_mode_enabled: false
+  token_rotation_enabled: false

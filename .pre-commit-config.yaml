@@ -1,0 +1,38 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: check-yaml
+      - id: debug-statements
+      - id: end-of-file-fixer
+      - id: mixed-line-ending
+      - id: trailing-whitespace
+
+  - repo: https://github.com/PyCQA/flake8
+    rev: 7.0.0
+    hooks:
+      - id: flake8
+
+  - repo: https://github.com/psf/black
+    rev: 24.4.2
+    hooks:
+      - id: black
+
+  - repo: https://github.com/asottile/seed-isort-config
+    rev: v2.2.0
+    hooks:
+      - id: seed-isort-config
+        args: [--exclude=templates/]
+
+  - repo: https://github.com/pre-commit/mirrors-isort
+    rev: v5.10.1 # Use the revision sha / tag you want to point at
+    hooks:
+      - id: isort
+        files: ^source/
+        types: [file, python]
+
+  - repo: https://github.com/awslabs/cfn-python-lint
+    rev: v1.2.5.a10 # The version of cfn-lint to use
+    hooks:
+      - id: cfn-python-lint
+        files: template.yaml

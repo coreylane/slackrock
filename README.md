@@ -1,5 +1,5 @@
 # Slackrock
-Converse with your favorite [LLMs](https://en.wikipedia.org/wiki/Large_language_model) without ever leaving Slack! **Slackrock** is a conversational AI assistant Slack bot powered by [Amazon Bedrock](https://aws.amazon.com/bedrock/) & your favorite cutting-edge frontier models. The project is focused on cost efficiency & simplicity.
+Converse with your favorite [LLMs](https://en.wikipedia.org/wiki/Large_language_model) without ever leaving Slack! **Slackrock** is a conversational AI assistant powered by [Amazon Bedrock](https://aws.amazon.com/bedrock/) & your favorite cutting-edge frontier models. The project is focused on cost efficiency & simplicity, while supporting a wide variety of AI models with differing strengths & weaknesses to fit the widest array of use cases.
 
 <video src="docs/video/slackrock.mp4" controls>
 Your browser does not support the video tag.

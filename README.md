@@ -69,7 +69,7 @@ Let's get started!
 
 1. Navigate to `Event Subscriptions` and Enable Events
 
-1. Enter your `SlackAppUrl` into Request URL field and confirm the endpoint is verified.
+1. Enter your `SlackrockUrl` from the previous step into Request URL field and confirm the endpoint is verified.
 
     ![slack_enable_events.png](/docs/images/slack_enable_events.png)
 

@@ -35,7 +35,7 @@ def invoke_model(messages):
         response = client.converse(
             modelId=modelId,
             messages=messages,
-            system=[{"text": "Respond using Slack flavored Markdown formatting."}],
+            system=[{"text": "Format messages using Slack flavored Markdown."}],
         )
 
         output_text = ""

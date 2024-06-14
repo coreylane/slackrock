@@ -14,7 +14,7 @@ Parameters:
       The amount of memory (in MB) allocated to the Lambda function.
       Increasing this may improve performance since the CPU power allocated to a Lambda function is proportional
       to the amount of memory configured for the function. However, this does have cost implications.
-      512 MB seems to work well based on testing, but you can adjust this value based on your specific requirements.
+      512 MB seems to work well based on testing, but you may adjust this value based on your specific requirements.
     Default: "512"
     MinValue: "128"
     MaxValue: "10240"
@@ -35,7 +35,7 @@ Resources:
       Runtime: python3.12
       Timeout: 300 # 5 Minutes
 
-      # Using provisioned concurrency can potential increase performance but also increases costs.
+      # Using provisioned concurrency can potentially increase performance but also increases costs.
       # Since one of my goals is to run this solution with the lowest cost possible I'm leaving it disabled by default.
       # AutoPublishAlias: live
       # ProvisionedConcurrencyConfig:

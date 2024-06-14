@@ -1,3 +1,5 @@
+![Under Heavy Development](https://img.shields.io/badge/status-under%20heavy%20development-red?style=for-the-badge)
+
 # Slackrock
 Converse with your favorite [LLMs](https://en.wikipedia.org/wiki/Large_language_model) without ever leaving Slack! **Slackrock** is a conversational AI assistant powered by [Amazon Bedrock](https://aws.amazon.com/bedrock/) & your favorite cutting-edge frontier models. The project is focused on cost efficiency & simplicity, while supporting a wide variety of AI models with differing strengths & weaknesses to fit the widest array of use cases.
 
@@ -88,14 +90,7 @@ It's time to test your bot! Review Cloudwatch Logs if you get any errors or the 
 1. Mention `@Slackrock` in a message, maybe ask about the history of Bundnerkase cheese 🧀, or anything else you'd like to know!
 
 ## Up next
-- Support direct message interactions
-- Multi-modal support, process image & document attachments, etc.
-- User interfaces to easily switch the model without leaving Slack
-    - Slack app home page drop-down selection.
-    - A slash-command to changes the currently active model
-    - Potentially make this preference customizable per-user in slack workspace. Leverage dynamodb (`AWS::Serverless::SimpleTable`)
-- Support sam integration with terraform
-- Pull from secrets manager directly via python boto3? I'm worried this approach will increase execution time & add additional latency, but it is more secure. Will test
+See [open issues](https://github.com/coreylane/slackrock/issues?q=is%3Aopen+is%3Aissue), any help is much appreciated!
 
 # FAQ
 
@@ -107,7 +102,7 @@ sam sync --watch --stack-name Slackrock
 ```
 
 ## How do I interact with different Bedrock models?
-Update the `BEDROCK_MODEL_ID` environment variable in `template.yaml` to one of the [supported models](https://docs.aws.amazon.com/bedrock/latest/userguide/conversation-inference.html#conversation-inference-supported-models-features) and run `sam deploy`.
+Update the `BEDROCK_MODEL_ID` environment variable in `template.yaml` to one of the [supported models](https://docs.aws.amazon.com/bedrock/latest/userguide/conversation-inference.html#conversation-inference-supported-models-features) and run `sam build && sam deploy`.
 
 Alternatively, you can also update the Lambda function environment variables directly via the AWS console or CLI.
 
@@ -121,9 +116,9 @@ The Bedrock [Converse API](https://docs.aws.amazon.com/bedrock/latest/APIReferen
 Currently this model is only available in US West (Oregon, us-west-2). Change the `region` parameter in `samconfig.toml` and try it out!
 
 ## Can I customize the personality or overall tone of the responses?
-Absolutely! This is a very useful and often fun feature to experiment with. Simply adjust the [system prompt](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html#bedrock-runtime_Converse-request-system) to the converse api call to influence how Bedrock models respond. You can fine-tune your system prompt to give your bot a more unique personality, meet specific constraints & business requirements, or add additional context. See: [Getting started with the Amazon Bedrock Converse API](https://community.aws/content/2hHgVE7Lz6Jj1vFv39zSzzlCilG/getting-started-with-the-amazon-bedrock-converse-api#setting-a-system-prompt). 
+Absolutely! This is a very useful and often fun feature to experiment with. Modify the [system prompt](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html#bedrock-runtime_Converse-request-system) in the converse api call to influence how Bedrock models respond. You can fine-tune your system prompt to give your bot a more unique personality, adhere to specific constraints, meet business requirements, or add additional context for specific use cases. See: [Getting started with the Amazon Bedrock Converse API](https://community.aws/content/2hHgVE7Lz6Jj1vFv39zSzzlCilG/getting-started-with-the-amazon-bedrock-converse-api#setting-a-system-prompt). 
 
-The default Slackrock system prompt simply instructs the models to use Slack compatible Markdown formatting. Anthropic has a great page to [learn more about system prompts](https://docs.anthropic.com/en/docs/system-prompts).
+The default Slackrock system prompt is simple, the response messages should be formatted with Slack flavored Markdown, however it's not perfect. Anthropic has great documentation on [system prompts](https://docs.anthropic.com/en/docs/system-prompts).
 
 Here is an example that will cause your app to respond to all queries
 
@@ -132,7 +127,7 @@ response = client.converse(
     modelId=modelId,
     messages=messages,
     system=[
-        {"text": "Respond like a pirate."}
+        {"text": "Respond in character as a pirate."}
     ],
 )
 ```

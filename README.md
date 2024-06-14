@@ -120,7 +120,7 @@ Absolutely! This is a very useful and often fun feature to experiment with. Modi
 
 The default Slackrock system prompt is simple, the response messages should be formatted with Slack flavored Markdown, however it's not perfect. Anthropic has great documentation on [system prompts](https://docs.anthropic.com/en/docs/system-prompts).
 
-Here is an example that will cause your app to respond to all queries
+This example system prompt will keep your bot in character as a pirate 🏴‍☠️
 
 ```python
 response = client.converse(

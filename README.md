@@ -77,9 +77,10 @@ Let's get started!
 
 1. Add the following bot event subscriptions and click the green save changes button at the bottom.
 
-- [app_mention](https://api.slack.com/events/app_mention)
-- [message.channels](https://api.slack.com/events/message.channels)
-- [app_home_opened](https://api.slack.com/events/app_home_opened) (optional)
+- [app_home_opened](https://api.slack.com/events/app_home_opened) - User clicked into your App Home
+- [app_mention](https://api.slack.com/events/app_mention) - Subscribe to only the message events that mention your app or bot
+- [message.channels](https://api.slack.com/events/message.channels) - A message was posted to a channel
+- [message.groups](https://api.slack.com/events/message.groups) - A message was posted to a private channel
 
     ![slack_bot_events.png](/docs/images/slack_bot_events.png)
 

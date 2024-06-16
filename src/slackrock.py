@@ -62,58 +62,6 @@ def respond_to_slack_within_3_seconds(body, ack):
     logger.debug(body)
 
 
-def handle_app_mention(say, body):
-    """
-    Handle the event when the Slack app is mentioned in a message.
-
-    Args:
-        say (callable): A function provided by the Slack API to send a response message.
-        body (dict): The event data received from Slack, containing information about the mention.
-
-    Returns:
-        None
-
-    Raises:
-        Exception: If an error occurs while processing the message or invoking the model.
-
-    This function performs the following steps:
-    1. Retrieves the bot user ID, channel ID, message text, and thread timestamp from the event data.
-    2. Removes the bot mention from the message text.
-    3. Invokes the model with the user's message.
-    4. Posts the model's response to the Slack channel.
-    5. Logs any errors that occur during the process.
-    """
-
-    bot_user_id = app.client.auth_test()["user_id"]
-    channel_id = body["event"]["channel"]
-    message_text = body["event"]["text"]
-    thread_ts = body["event"]["ts"]
-
-    mention = f"<@{bot_user_id}>"
-    message = message_text.replace(mention, "").strip()
-
-    logger.info(f"Channel ID: {channel_id}")
-    logger.info(f"Thread TS: {thread_ts}")
-
-    try:
-        messages = [{"role": "user", "content": [{"text": message}]}]
-        logger.info(f"Invoking model with messages: {messages}")
-
-        model_response = invoke_model(messages)
-
-        say(model_response, thread_ts=thread_ts)
-        logger.info(f"Posted response to channel: {channel_id}")
-
-    except Exception as e:
-        logger.error(f"An error occurred while processing the message: {str(e)}")
-        say(text=f"Error: {str(e)}", thread_ts=thread_ts)
-
-
-app.event("app_mention")(
-    ack=respond_to_slack_within_3_seconds, lazy=[handle_app_mention]
-)
-
-
 @app.message(":bug:")
 def handle_debug_message(message, say):
     logger.info(f"Received debug message: {message['text']}")
@@ -147,27 +95,45 @@ def handle_message(body, say):
 
     Raises:
         Exception: If an error occurs while processing the message.
-
-    This function performs the following steps:
-    1. Extracts relevant information from the incoming message payload, such as the thread timestamp, bot ID, and channel ID.
-    2. Checks if the message is part of a thread and if the bot has responded earlier in the thread.
-    3. Retrieves the conversation history from Slack for the given thread.
-    4. Constructs a list of messages with their roles (user or assistant) and content.
-    5. Invokes a model with the constructed list of messages to generate a response.
-    6. Sends the generated response back to the Slack channel using the provided `say` function.
-    7. If an exception occurs during the process, it logs the error and sends an error message to the Slack channel.
     """
     logger.debug(body)
 
-    event = body["event"]
-    thread_ts = event.get("thread_ts")
-    bot_id = app.client.auth_test()["bot_id"]
-    channel = event["channel"]
+    bot_user_id = app.client.auth_test()["user_id"]
+    message_text = body["event"].get("text", "")
 
+    # Process app mention
+    if f"<@{bot_user_id}>" in message_text:
+        logger.info("Processing app mention")
+        ts = body["event"]["ts"]
+
+        message = [
+            {
+                "role": "user",
+                "content": [
+                    {"text": message_text.replace(f"<@{bot_user_id}>", "").strip()}
+                ],
+            }
+        ]
+
+        try:
+            logger.info(f"Invoking model with message: {message}")
+            model_response = invoke_model(message)
+            say(model_response, thread_ts=ts)
+            return
+
+        except Exception as e:
+            logger.error(
+                f"An error occurred while processing the app mention: {str(e)}"
+            )
+            say(text=f"Error: {str(e)}", thread_ts=ts)
+
+    # Process threaded conversations
+    thread_ts = body["event"].get("thread_ts")
     if not thread_ts:
         logger.info("Message is not part of a thread. Skipping processing.")
         return
 
+    channel = body["event"]["channel"]
     conversation_history = app.client.conversations_replies(
         channel=channel,
         ts=thread_ts,
@@ -175,7 +141,8 @@ def handle_message(body, say):
     )
 
     bot_responded_earlier = any(
-        message.get("bot_id") == bot_id for message in conversation_history["messages"]
+        message.get("user") == bot_user_id
+        for message in conversation_history["messages"]
     )
 
     if not bot_responded_earlier:
@@ -184,7 +151,7 @@ def handle_message(body, say):
 
     messages = []
     for message in conversation_history["messages"]:
-        if message.get("bot_id") == bot_id:
+        if message.get("user") == bot_user_id:
             messages.append(
                 {"role": "assistant", "content": [{"text": message["text"]}]}
             )
@@ -193,10 +160,10 @@ def handle_message(body, say):
 
     try:
         logger.info(f"Invoking model with messages: {messages}")
-
         model_response = invoke_model(messages)
 
         say(model_response, thread_ts=thread_ts)
+        return
 
     except Exception as e:
         logger.error(f"ERROR: occurred while processing message: {str(e)}")

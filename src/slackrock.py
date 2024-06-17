@@ -64,6 +64,7 @@ def respond_to_slack_within_3_seconds(body, ack):
     logger.debug(body)
 
 
+# Print out some debug info
 @app.message(":bug:")
 def handle_debug_message(message, say):
     logger.info(f"Received debug message: {message['text']}")

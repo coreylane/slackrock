@@ -6,7 +6,7 @@ Converse with your favorite [LLMs](https://en.wikipedia.org/wiki/Large_language_
 https://github.com/coreylane/slackrock/assets/5312939/58479fa6-6fc9-4981-8c91-102a5a8f3dfc
 
 ## ✨ Features
-💬 Uses Amazon Bedrock [Converse API](https://aws.amazon.com/about-aws/whats-new/2024/05/amazon-bedrock-new-converse-api/) for multi-turn conversations, allowing models to retain context of the interaction over a long period of time. Come back to a thread days later and pick up where you left off!
+💬 Using Amazon Bedrock [Converse API](https://aws.amazon.com/about-aws/whats-new/2024/05/amazon-bedrock-new-converse-api/) enables multi-turn conversations, allowing models to retain context of the discussion over a long period of time. Come back to a thread days later and pick up where you left off. Currently supports interaction via @app mentions in public & private channels or sending direct messages to the bot. 
 
 🎛️ **Customization**: Quickly evaluate and experiment with [supported models](https://docs.aws.amazon.com/bedrock/latest/userguide/conversation-inference.html#conversation-inference-supported-models-features) including Amazon Titan, Anthropic Claude, Mistral AI, Cohere Command, and Meta Llama. Using [Slack Bolt for Python](https://slack.dev/bolt-python/tutorial/getting-started) makes it easy to extend the Lambda code to create your own event handlers or Slack Slash Commands.
 
@@ -78,9 +78,9 @@ Let's get started!
 1. Add the following bot event subscriptions and click the green save changes button at the bottom.
 
 - [app_home_opened](https://api.slack.com/events/app_home_opened) - User clicked into your App Home
-- [app_mention](https://api.slack.com/events/app_mention) - Subscribe to only the message events that mention your app or bot
 - [message.channels](https://api.slack.com/events/message.channels) - A message was posted to a channel
 - [message.groups](https://api.slack.com/events/message.groups) - A message was posted to a private channel
+- [message.im](https://api.slack.com/events/message.im) - A message was posted in a direct message channel
 
     ![slack_bot_events.png](/docs/images/slack_bot_events.png)
 

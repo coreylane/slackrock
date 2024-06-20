@@ -31,7 +31,7 @@ https://github.com/coreylane/slackrock/assets/5312939/58479fa6-6fc9-4981-8c91-10
 ## 🚀 Deploy Slackrock
 Let's get started!
 
-1. [Request access](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access.html) to desired Amazon Bedrock models. The default model used in this solution is `anthropic.claude-3-sonnet-20240229-v1:0`. Feel free to request as many or as few as you like, the process is automated and models become available immediately.
+1. [Request access](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access.html) to desired Amazon Bedrock models. The default model used in this solution is `anthropic.claude-3-5-sonnet-20240620-v1:0`. Feel free to request as many or as few as you like, the process is automated and models become available immediately.
 
 1. Create a Slack app (https://api.slack.com/apps) from manifest using the `slack-app-manifest.yaml` file provided in this project.
 

@@ -48,7 +48,7 @@ Resources:
         Variables:
           SLACK_BOT_TOKEN: !Sub "{{resolve:secretsmanager:${SlackSecretsName}:SecretString:SLACK_BOT_TOKEN}}"
           SLACK_SIGNING_SECRET: !Sub "{{resolve:secretsmanager:${SlackSecretsName}:SecretString:SLACK_SIGNING_SECRET}}"
-          BEDROCK_MODEL_ID: anthropic.claude-3-sonnet-20240229-v1:0
+          BEDROCK_MODEL_ID: anthropic.claude-3-5-sonnet-20240620-v1:0
       Policies:
         - Version: "2012-10-17"
           Statement:
@@ -62,6 +62,24 @@ Resources:
               Action:
                 - bedrock:InvokeModel
               Resource: "*"
+            - Sid: AllowDynamoDBAccess
+              Effect: Allow
+              Action:
+                - dynamodb:PutItem
+                - dynamodb:GetItem
+                - dynamodb:UpdateItem
+                - dynamodb:DeleteItem
+                - dynamodb:Query
+                - dynamodb:Scan
+              Resource: !GetAtt SlackrockTable.Arn
+
+  SlackrockTable:
+    Type: AWS::Serverless::SimpleTable
+    Properties:
+      TableName: Slackrock
+      PrimaryKey:
+        Name: id
+        Type: String
 
 Outputs:
   SlackrockUrl:

@@ -68,6 +68,7 @@ def respond_to_slack_within_3_seconds(body, ack):
 @app.message(":bug:")
 def handle_debug_message(message, say):
     logger.info(f"Received debug message: {message['text']}")
+    logger.info(f"Current Bedrock model ID: {os.environ.get('BEDROCK_MODEL_ID')}")
     logger.info(f"Lambda function name: {os.environ.get('AWS_LAMBDA_FUNCTION_NAME')}")
     logger.info(f"Lambda version: {os.environ.get('AWS_LAMBDA_FUNCTION_VERSION')}")
     logger.info(f"Lambda region: {os.environ.get('AWS_REGION')}")
@@ -75,6 +76,7 @@ def handle_debug_message(message, say):
     logger.info(f"Lambda log group: {os.environ.get('AWS_LAMBDA_LOG_GROUP_NAME')}")
 
     debug_info = (
+        f"Current Bedrock model ID: {os.environ.get('BEDROCK_MODEL_ID')}\n"
         f"Current Lambda function name: {os.environ.get('AWS_LAMBDA_FUNCTION_NAME')}\n"
         f"Current Lambda function version: {os.environ.get('AWS_LAMBDA_FUNCTION_VERSION')}\n"
         f"Current Lambda region: {os.environ.get('AWS_REGION')}\n"

@@ -9,6 +9,7 @@ https://github.com/coreylane/slackrock/assets/5312939/58479fa6-6fc9-4981-8c91-10
 💬 Using Amazon Bedrock [Converse API](https://aws.amazon.com/about-aws/whats-new/2024/05/amazon-bedrock-new-converse-api/) enables multi-turn conversations, allowing models to retain context of the discussion over a long period of time. You can come back to a thread days later and pick up where you left off. Currently supports interaction via @app mentions in public & private channels or sending direct messages to the bot. 
 
 🎛️ **Customization**: Quickly evaluate and experiment with [supported models](https://docs.aws.amazon.com/bedrock/latest/userguide/conversation-inference.html#conversation-inference-supported-models-features) including Amazon Titan, Anthropic Claude, Mistral AI, Cohere Command, and Meta Llama. Using [Slack Bolt for Python](https://slack.dev/bolt-python/tutorial/getting-started) makes it easy to extend the Lambda code to create your own event handlers or Slack Slash Commands.
+- Users can easily switch their preferred Bedrock model directly from the Slack app's home tab. 
 
 🧮 **Cost Efficiency**: Only pay for what you use with Amazon Bedrock's pay-as-you-go pricing.
 - Costs automatically decrease during decreased periods of low usage ie. holidays and weekends.
@@ -89,6 +90,7 @@ It's time to test your bot! Review Cloudwatch Logs if you get any errors or the 
 
 1. Invite the app to a channel
 1. Mention `@Slackrock` in a message, maybe ask about the history of Bundnerkase cheese 🧀, or anything else you'd like to know!
+1. Navigate to the app's home tab and try out different models.
 
 ## Up next
 See [open issues](https://github.com/coreylane/slackrock/issues?q=is%3Aopen+is%3Aissue), any help is much appreciated!
@@ -103,7 +105,7 @@ sam sync --watch --stack-name Slackrock
 ```
 
 ## How do I interact with different Bedrock models?
-Update the `BEDROCK_MODEL_ID` environment variable in `template.yaml` to one of the [supported models](https://docs.aws.amazon.com/bedrock/latest/userguide/conversation-inference.html#conversation-inference-supported-models-features) and run `sam build && sam deploy`.
+Users can now select their preferred model directly from the Slack app's home tab. To set system-wide default, update the BEDROCK_MODEL_ID environment variable in template.yaml to one of the supported models and run sam build && sam deploy.
 
 Alternatively, you can also update the Lambda function environment variables directly via the AWS console or CLI.
 

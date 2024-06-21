@@ -49,6 +49,7 @@ Resources:
           SLACK_BOT_TOKEN: !Sub "{{resolve:secretsmanager:${SlackSecretsName}:SecretString:SLACK_BOT_TOKEN}}"
           SLACK_SIGNING_SECRET: !Sub "{{resolve:secretsmanager:${SlackSecretsName}:SecretString:SLACK_SIGNING_SECRET}}"
           BEDROCK_MODEL_ID: anthropic.claude-3-5-sonnet-20240620-v1:0
+          DYNAMODB_TABLE_NAME: !Ref SlackrockTable
       Policies:
         - Version: "2012-10-17"
           Statement:
@@ -78,7 +79,7 @@ Resources:
     Properties:
       TableName: Slackrock
       PrimaryKey:
-        Name: id
+        Name: user_id
         Type: String
 
 Outputs:

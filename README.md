@@ -6,7 +6,7 @@ Converse with your favorite [LLMs](https://en.wikipedia.org/wiki/Large_language_
 https://github.com/coreylane/slackrock/assets/5312939/58479fa6-6fc9-4981-8c91-102a5a8f3dfc
 
 ## ✨ Features
-💬 Using Amazon Bedrock [Converse API](https://aws.amazon.com/about-aws/whats-new/2024/05/amazon-bedrock-new-converse-api/) enables multi-turn conversations, allowing models to retain context of the discussion over a long period of time. Come back to a thread days later and pick up where you left off. Currently supports interaction via @app mentions in public & private channels or sending direct messages to the bot. 
+💬 Using Amazon Bedrock [Converse API](https://aws.amazon.com/about-aws/whats-new/2024/05/amazon-bedrock-new-converse-api/) enables multi-turn conversations, allowing models to retain context of the discussion over a long period of time. You can come back to a thread days later and pick up where you left off. Currently supports interaction via @app mentions in public & private channels or sending direct messages to the bot. 
 
 🎛️ **Customization**: Quickly evaluate and experiment with [supported models](https://docs.aws.amazon.com/bedrock/latest/userguide/conversation-inference.html#conversation-inference-supported-models-features) including Amazon Titan, Anthropic Claude, Mistral AI, Cohere Command, and Meta Llama. Using [Slack Bolt for Python](https://slack.dev/bolt-python/tutorial/getting-started) makes it easy to extend the Lambda code to create your own event handlers or Slack Slash Commands.
 
@@ -31,7 +31,7 @@ https://github.com/coreylane/slackrock/assets/5312939/58479fa6-6fc9-4981-8c91-10
 ## 🚀 Deploy Slackrock
 Let's get started!
 
-1. [Request access](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access.html) to desired Amazon Bedrock models. The default model used in this solution is `anthropic.claude-3-5-sonnet-20240620-v1:0`. Feel free to request as many or as few as you like, the process is automated and models become available immediately.
+1. [Request access](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access.html) to desired Amazon Bedrock models. The default model used in this solution is `anthropic.claude-3-5-sonnet-20240620-v1:0`. Feel free to request as many or as few as you like; the process is automated, and models become available immediately.
 
 1. Create a Slack app (https://api.slack.com/apps) from manifest using the `slack-app-manifest.yaml` file provided in this project.
 

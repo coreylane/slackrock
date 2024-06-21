@@ -3,7 +3,7 @@
 # Slackrock
 Converse with your favorite [LLMs](https://en.wikipedia.org/wiki/Large_language_model) without ever leaving Slack! **Slackrock** is a conversational AI assistant powered by [Amazon Bedrock](https://aws.amazon.com/bedrock/) & your favorite cutting-edge frontier models. The project is focused on cost efficiency & simplicity, while supporting a wide variety of AI models with differing strengths & weaknesses to fit the widest array of use cases.
 
-https://github.com/coreylane/slackrock/assets/5312939/58479fa6-6fc9-4981-8c91-102a5a8f3dfc
+https://github.com/coreylane/slackrock/assets/5312939/daee9e36-bdbc-4c65-af35-d99f9c9f227e
 
 ## ✨ Features
 💬 Using Amazon Bedrock [Converse API](https://aws.amazon.com/about-aws/whats-new/2024/05/amazon-bedrock-new-converse-api/) enables multi-turn conversations, allowing models to retain context of the discussion over a long period of time. You can come back to a thread days later and pick up where you left off. Currently supports interaction via @app mentions in public & private channels or sending direct messages to the bot. 
